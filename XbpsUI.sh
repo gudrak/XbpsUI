@@ -21,25 +21,16 @@ function install
 	#margin for margins
 	#inline info to display info inline
 	#preview to show the package description 
-	#header and prompt to give info for people to know how to do stuff 
-	pkg="$( xbps-query -Rs "" | grep -v "*" | sort -k1,1 -u | 
-		fzf -i \
-                    --multi \ 
-                    --exact \
-                    --no-sort \
-                    --select-1 \
-                    --query="$argument_input" \
-                    --cycle \
-                    --reverse \
-                    --margin="4%,1%,1%,2%" \
+	#header and prompt to give info for people to know how to do stuff
+	pkg="$( xbps-query -Rs "" | sort -u | fzf -i \
+                    --multi --exact --no-sort --select-1 --query="$argument_input" \
+                    --cycle --reverse --margin="4%,1%,1%,2%" \
                     --inline-info \
                     --preview 'xbps-query -R {1} '\
                     --preview-window=right:55%:wrap \
                     --header="TAB key to (un)select. ENTER to install. ESC to quit." \
-                    --prompt="filter> " |
-                awk '{print $1}'                                                  
+                    --prompt="filter> " | awk '{print $2}'                                                  
             )"
-            
             pkg="$( echo "$pkg" | paste -sd " " )"
             if [[ -n "$pkg" ]]
             then 

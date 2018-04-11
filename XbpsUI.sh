@@ -43,7 +43,7 @@ function purge
 {
 	local pkg
 	local argument_input	
-	pkg="$( xbps-query -l | sort -k1,1 -u | 
+	pkg="$( xbps-query -l | sort -u | 
 		fzf -i \
                     --multi \
                     --exact \
@@ -58,7 +58,7 @@ function purge
                     --preview-window=right:55%:wrap \
                     --header="TAB key to (un)select. ENTER to purge. ESC to quit." \
                     --prompt="filter> " |
-                awk '{print $1}'                                                  
+                awk '{print $2}'                                                  
             )"
             
             pkg="$( echo "$pkg" | paste -sd " " )"

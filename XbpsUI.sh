@@ -22,11 +22,11 @@ function install
 	#inline info to display info inline
 	#preview to show the package description 
 	#header and prompt to give info for people to know how to do stuff
-	pkg="$( xbps-query -Rs "" | sort -u | fzf -i \
+	pkg="$( xbps-query -Rs "" | sort -u | grep -v "*" | fzf -i \
                     --multi --exact --no-sort --select-1 --query="$argument_input" \
                     --cycle --reverse --margin="4%,1%,1%,2%" \
                     --inline-info \
-                    --preview 'xbps-query -R {1} '\
+                    --preview 'xbps-query -R {2} '\
                     --preview-window=right:55%:wrap \
                     --header="TAB key to (un)select. ENTER to install. ESC to quit." \
                     --prompt="filter> " | awk '{print $2}'                                                  
@@ -54,7 +54,7 @@ function purge
                     --reverse \
                     --margin="4%,1%,1%,2%" \
                     --inline-info \
-                    --preview 'xbps-query -S {1} '\
+                    --preview 'xbps-query -S {2} '\
                     --preview-window=right:55%:wrap \
                     --header="TAB key to (un)select. ENTER to purge. ESC to quit." \
                     --prompt="filter> " |

@@ -2,26 +2,26 @@
 
 function update
 {
-		#command to update de system
+		#comando para actualizar el sistema
 		sudo xbps-install -Suv
 }
 
 function install 
 {
-	#declaration of local variables 
+	#declaración de variables locales
 	local pkg
 	local argument_input	
 	
-	#selecting of packages to install
-	#flags multi to be able to pick multiple packages
-	#exact to match exact match
-	#no sort self explanatory
-	#cycle to enable cycle scroll
-	#reverse to set orientation to reverse
-	#margin for margins
-	#inline info to display info inline
-	#preview to show the package description 
-	#header and prompt to give info for people to know how to do stuff
+# selección de paquetes para instalar
+#flags multi para poder elegir varios paquetes
+#exact para que coincida con la concordancia exacta
+#no ordena que se explique por sí mismo
+#cycle para habilitar el ciclo de desplazamiento
+#reverse para establecer la orientación en reversa
+#margin para márgenes
+#inline info para mostrar información en línea
+#preview para mostrar la descripción del paquete
+#header y solicitud para dar información para que las personas sepan cómo hacer las cosas
 	pkg="$( xbps-query -Rs "" | sort -u | grep -v "*" | fzf -i \
                     --multi --exact --no-sort --select-1 --query="$argument_input" \
                     --cycle --reverse --margin="4%,1%,1%,2%" \
